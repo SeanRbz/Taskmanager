@@ -16,4 +16,32 @@
 // You will be asked to justify your choice during the follow-up interview.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export {};
+import { createSlice, configureStore, PayloadAction } from '@reduxjs/toolkit';
+import { MOCK_TASKS } from '@/data/mockData';
+import { Task } from '@/types';
+
+interface TasksState {
+  tasks: Task[];
+}
+
+const tasksSlice = createSlice({
+  name: 'tasks',
+  initialState: { tasks: MOCK_TASKS } as TasksState,
+  reducers: {
+    updateTask(state, action: PayloadAction<Task>) {
+      const idx = state.tasks.findIndex(t => t.id === action.payload.id);
+      if (idx !== -1) state.tasks[idx] = action.payload;
+    },
+    completeTask(state, action: PayloadAction<string>) {
+      const task = state.tasks.find(t => t.id === action.payload);
+      if (task) task.status = 'done';
+    },
+  },
+});
+
+export const { updateTask, completeTask } = tasksSlice.actions;
+
+export const store = configureStore({ reducer: { tasks: tasksSlice.reducer } });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

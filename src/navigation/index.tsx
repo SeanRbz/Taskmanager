@@ -16,10 +16,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Linking from 'expo-linking';
 import { Text } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { RootTabParamList, TasksStackParamList } from '@/types';
-
-// TODO: Replace these placeholder imports with your real screen components
+import { RootState } from '@/state';
 import TaskListScreen from '@/screens/TaskListScreen';
 import TaskDetailScreen from '@/screens/TaskDetailScreen';
 import EditTaskScreen from '@/screens/EditTaskScreen';
@@ -65,8 +65,9 @@ function TasksStack() {
 
 // ─── Root tab navigator ───────────────────────────────────────────────────────
 export default function RootNavigator() {
-  // TODO: Wire up the badge count to your incomplete task count from state
-  const incompleteBadgeCount = 0;
+  const incompleteBadgeCount = useSelector((state: RootState) =>
+    state.tasks.tasks.filter(t => t.status !== 'done').length
+  );
 
   return (
     <NavigationContainer linking={linkingConfig}>
@@ -83,7 +84,6 @@ export default function RootNavigator() {
           component={TasksStack}
           options={{
             tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>📋</Text>,
-            // TODO: Replace the hardcoded 0 with your real incomplete task count
             tabBarBadge: incompleteBadgeCount > 0 ? incompleteBadgeCount : undefined,
           }}
         />
