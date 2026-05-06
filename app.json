@@ -4,7 +4,6 @@
     "slug": "task-manager-starter",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "backgroundColor": "#1E3A5F"
@@ -19,6 +18,7 @@
       },
       "package": "com.assessment.taskmanager"
     },
-    "scheme": "taskmanager"
+    "scheme": "taskmanager",
+    "plugins": []
   }
 }
