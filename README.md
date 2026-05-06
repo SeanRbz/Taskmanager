@@ -90,13 +90,26 @@ When complete, please:
 ### Please add to this README before submitting:
 
 **State management choice:**
-> _Which library/approach did you use, and why? What would make you switch?_
+- Fixed Expo Go setup issues when running on a Windows laptop with a physical device for testing
+- Used Redux Toolkit (RTK) to modernize state management and reduce Redux boilerplate (actions, reducers, and store setup simplified)
+- Chose Jest for testing, as it integrates well with Expo and React Native projects
+- Kept UI implementation minimal to focus on core functionality and logic rather than styling complexity
 
 **Assumptions made:**
-> _Anything that was ambiguous in the brief and how you resolved it_
+- “Optimistic update” is interpreted as immediately updating the UI on user interaction, without waiting for async confirmation (no API layer or persistent storage implemented)
+- Mock data is hard coded only and is not persisted to local storage due to time constraints
+- dueDate and createdAt are stored as ISO strings and rendered directly without additional formatting utilities or date libraries
+- “Marking complete” is treated as a one-way action (tasks cannot be reverted to incomplete, based on brief interpretation)
+- Deep linking is implemented in a basic form and validated manually as per requirements
 
 **If I had more time:**
-> _What would you do differently or add?_
+- Introduce an API layer using Axios to simulate real backend interactions and better structure async flows (useEffect, useLayoutEffect, etc.)
+- Improve UI/UX design with better spacing, hierarchy, and interaction feedback
+- Create reusable utility functions for parsing and formatting dueDate and createdAt
+- Improve navigation and data flow by using structured route params more consistently
+- Consider using React Query for server-state management, caching, and request handling if the app scales
+- Create reusable components for texts, task list screen renders. etc
+
 
 ---
 
