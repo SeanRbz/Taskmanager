@@ -24,19 +24,27 @@
     "react-redux": "^9.2.0"
   },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
+    "@types/jest": "^29.5.0",
+    "jest": "^29.7.0",
+    "jest-expo": "~54.0.0",
+    "ts-jest": "^29.0.0",
     "@types/react": "~19.1.0",
     "babel-preset-expo": "~13.0.0",
     "babel-plugin-module-resolver": "^5.0.3",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
-    "typescript": "~5.9.2"
+    "typescript": "~5.3.3"
   },
   "jest": {
-    "preset": "jest-expo",
-    "setupFilesAfterFramework": [
-      "@testing-library/react-native/extend-expect"
-    ]
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.tsx?$": ["ts-jest", {
+        "tsconfig": "tsconfig.test.json"
+      }]
+    },
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    }
   },
   "private": true
 }

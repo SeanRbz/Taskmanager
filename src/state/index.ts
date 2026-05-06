@@ -18,7 +18,7 @@
 
 import { createSlice, configureStore, PayloadAction } from '@reduxjs/toolkit';
 import { MOCK_TASKS } from '@/data/mockData';
-import { Task } from '@/types';
+import { Task, TaskStatus } from '@/types';
 
 interface TasksState {
   tasks: Task[];
@@ -36,10 +36,14 @@ const tasksSlice = createSlice({
       const task = state.tasks.find(t => t.id === action.payload);
       if (task) task.status = 'done';
     },
+    rollbackTask(state, action: PayloadAction<{ id: string; previousStatus: TaskStatus }>) {
+      const task = state.tasks.find(t => t.id === action.payload.id);
+      if (task) task.status = action.payload.previousStatus;
+    },
   },
 });
 
-export const { updateTask, completeTask } = tasksSlice.actions;
+export const { updateTask, completeTask, rollbackTask } = tasksSlice.actions;
 
 export const store = configureStore({ reducer: { tasks: tasksSlice.reducer } });
 
