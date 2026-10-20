@@ -1,0 +1,21 @@
+# Dependencies and build output are produced inside the image
+node_modules
+.expo
+dist
+web-build
+coverage
+
+# Not needed to build or test the app
+.git
+.claude
+design-system
+*.md
+*.log
+Dockerfile
+compose.yaml
+.dockerignore
+
+# Secrets — pass EXPO_PUBLIC_* values as build args instead
+.env
+.env.*
+!.env.example

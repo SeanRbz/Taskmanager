@@ -1,0 +1,41 @@
+name: team-task-manager
+
+services:
+  # Production web build → http://localhost:8080
+  web:
+    build:
+      context: .
+      target: web
+      args:
+        EXPO_PUBLIC_MOCK_API_LATENCY_MS: ${EXPO_PUBLIC_MOCK_API_LATENCY_MS:-300}
+        EXPO_PUBLIC_MOCK_API_FAILURE_RATE: ${EXPO_PUBLIC_MOCK_API_FAILURE_RATE:-0}
+    image: team-task-manager:web
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  # Expo dev server with live reload → `docker compose --profile dev up dev`
+  dev:
+    profiles: ["dev"]
+    build:
+      context: .
+      target: dev
+    image: team-task-manager:dev
+    ports:
+      - "8081:8081"
+    environment:
+      # Your machine's LAN IP, so Expo Go on a phone can reach Metro.
+      REACT_NATIVE_PACKAGER_HOSTNAME: ${REACT_NATIVE_PACKAGER_HOSTNAME:-127.0.0.1}
+    volumes:
+      - .:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true
+
+  # Typecheck + lint + tests → `docker compose run --rm test`
+  test:
+    profiles: ["test"]
+    build:
+      context: .
+      target: test
+    image: team-task-manager:test
