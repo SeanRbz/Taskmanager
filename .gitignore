@@ -8,4 +8,10 @@ dist/
 *.mobileprovision
 *.orig.*
 web-build/
+coverage/
 .env
+.env.local
+*.log
+
+# Claude Code: commit shared skills/settings, keep personal overrides local
+.claude/settings.local.json

@@ -1,24 +1,31 @@
 {
   "expo": {
     "name": "Team Task Manager",
-    "slug": "task-manager-starter",
+    "slug": "team-task-manager",
     "version": "1.0.0",
     "orientation": "portrait",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
+    "scheme": "taskmanager",
     "splash": {
-      "backgroundColor": "#1E3A5F"
+      "backgroundColor": "#0F766E"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.assessment.taskmanager"
+      "bundleIdentifier": "com.teamtaskmanager.app"
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#1E3A5F"
+        "backgroundColor": "#0F766E"
       },
-      "package": "com.assessment.taskmanager"
+      "package": "com.teamtaskmanager.app"
     },
-    "scheme": "taskmanager",
-    "plugins": []
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-font",
+      "expo-asset"
+    ]
   }
 }
